@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Contacts</string>
+    <string name="display_list_of_contacts">Display list of contacts</string>
+    <string name="display_contacts_location">Display contacts location</string>
+    <string name="display_settings">Display Settings</string>
+    <string name="save_the_contact">Save the Contact</string>
+</resources>
