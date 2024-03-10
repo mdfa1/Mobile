@@ -17,7 +17,7 @@ public class DatePickerDialog extends DialogFragment {
 
     Calendar selectedDate;
     CalendarView cv;
-    Button save, cancel;
+    Button select, cancel;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class DatePickerDialog extends DialogFragment {
 
     private void initLayouts(View view) {
         cv = view.findViewById(R.id.calendarView);
-        save = view.findViewById(R.id.buttonSave);
+        select = view.findViewById(R.id.buttonSelect);
         cancel = view.findViewById(R.id.buttonCancel);
         cv.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -44,7 +44,7 @@ public class DatePickerDialog extends DialogFragment {
                 getDialog().dismiss();
             }
         });
-        save.setOnClickListener(new View.OnClickListener(){
+        select.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 saveItem(selectedDate);
