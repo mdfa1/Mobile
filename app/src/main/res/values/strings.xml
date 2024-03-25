@@ -22,4 +22,9 @@
     <string name="home">Home</string>
     <string name="cell">Cell</string>
     <string name="email">Email</string>
+    <string name="sort_contacts_by">Sort Contacts By:</string>
+    <string name="name">Name</string>
+    <string name="sort_order">Sort Order:</string>
+    <string name="ascending">Ascending</string>
+    <string name="descending">Descending</string>
 </resources>
