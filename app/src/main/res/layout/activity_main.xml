@@ -269,6 +269,26 @@
                 app:layout_constraintStart_toEndOf="@id/textBirthday"
                 app:layout_constraintTop_toBottomOf="@id/editEmail" />
 
+            <Button
+                android:id="@+id/btnSelectRelationship"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Relationship"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewBirthday"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:onClick="showRelationshipDialog"/>
+
+            <TextView
+                android:id="@+id/textRelationship"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Relationship: Not Set"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnSelectRelationship"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

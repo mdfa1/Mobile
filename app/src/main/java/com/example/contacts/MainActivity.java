@@ -18,11 +18,11 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.SaveDateListener {
 
     ImageButton listImageButton, mapImageButton, settingsImageButton, saveButton;
-    Button changeBirthdayButton;
+    Button changeBirthdayButton, selectRelationshipButton; // Added button for selecting relationship
     ToggleButton editToggle;
     EditText nameEditText, addressEditText, cityEditText,
             stateEditText, zipEditText, homeEditText,
-            cellEditText, emaiEditText;
+            cellEditText, emailEditText; // Corrected typo in emailEditText
     TextView birthdayText;
 
     @Override
@@ -34,10 +34,12 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         initToggleButton();
         setForEditing(false);
         initChangeBirthdayButton();
+        initSelectRelationshipButton();
+        // Initialize the button for selecting relationship
     }
 
     private void initToggleButton() {
-        editToggle.setOnClickListener(new View.OnClickListener(){
+        editToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setForEditing(editToggle.isChecked());
@@ -53,10 +55,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         zipEditText.setEnabled(checked);
         homeEditText.setEnabled(checked);
         cellEditText.setEnabled(checked);
-        emaiEditText.setEnabled(checked);
+        emailEditText.setEnabled(checked); // Corrected typo in emailEditText
         changeBirthdayButton.setEnabled(checked);
         saveButton.setEnabled(checked);
-        if(checked) {
+        if (checked) {
             nameEditText.requestFocus();
             InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             imm.showSoftInput(nameEditText, 0);
@@ -64,17 +66,49 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     }
 
     private void initChangeBirthdayButton() {
-        changeBirthdayButton.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View view) {
-                        FragmentManager fm =getSupportFragmentManager();
-                        DatePickerDialog dialog = new DatePickerDialog();
-                        dialog.show(fm, "DatePicker");
-                    }
-                });
+        changeBirthdayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Show the date picker dialog
+                showDatePickerDialog();
+            }
+        });
     }
 
-    private void initLayoutComponents(){
+    private void showDatePickerDialog() {
+        final Calendar currentDate = Calendar.getInstance();
+        int year = currentDate.get(Calendar.YEAR);
+        int month = currentDate.get(Calendar.MONTH);
+        int day = currentDate.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog();
+        datePickerDialog.setDate(year, month, day);
+        datePickerDialog.setListener(new DatePickerDialog.SaveDateListener() {
+            @Override
+            public void didFinishDatePickerDialog(Calendar selectedDate) {
+                birthdayText.setText(DateFormat.format("dd/MM/yyyy", selectedDate));
+            }
+        });
+        datePickerDialog.show(getSupportFragmentManager(), "DatePicker");
+    }
+
+    // Initialize the button for selecting relationship
+    private void initSelectRelationshipButton() {
+        selectRelationshipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showRelationshipDialog();
+            }
+        });
+    }
+
+    // Method to show the custom dialog for selecting relationship
+    private void showRelationshipDialog() {
+        RelationshipDialog dialog = new RelationshipDialog();
+        dialog.show(getSupportFragmentManager(), "RelationshipDialog");
+    }
+
+    private void initLayoutComponents() {
         listImageButton = findViewById(R.id.imageButtonList);
         mapImageButton = findViewById(R.id.imageButtonMap);
         settingsImageButton = findViewById(R.id.imageButtonSettings);
@@ -84,12 +118,13 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         cityEditText = findViewById(R.id.editCity);
         stateEditText = findViewById(R.id.editState);
         zipEditText = findViewById(R.id.editZip);
-        homeEditText  = findViewById(R.id.editHome);
+        homeEditText = findViewById(R.id.editHome);
         cellEditText = findViewById(R.id.editCell);
-        emaiEditText = findViewById(R.id.editEmail);
+        emailEditText = findViewById(R.id.editEmail); // Corrected typo in emailEditText
         changeBirthdayButton = findViewById(R.id.btnBirthday);
         saveButton = findViewById(R.id.imageButtonSave);
         birthdayText = findViewById(R.id.textViewBirthday);
+        selectRelationshipButton = findViewById(R.id.btnSelectRelationship); // Added initialization for the select relationship button
     }
 
     @Override
